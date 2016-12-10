@@ -1,0 +1,52 @@
+<%= form_for(product) do |f| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <br>
+
+  <div class="field">
+  	<%= f.label :brand %>
+	<%= f.collection_select(:brand_id, Brand.all, :id, :name, prompt: true) %>
+	<br>
+
+  </div>
+
+  <br>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <br>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <br>
+
+  	<div class="actions">
+		<% if Brand.first != nil %>
+			<%= f.submit %>
+		<% else %>
+			<p style="color:red"> Error: No Brand, please create brand. </p>
+		<% end %>
+  	</div>
+
+<% end %>
